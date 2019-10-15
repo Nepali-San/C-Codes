@@ -1,64 +1,62 @@
-#include <bits/stdc++.h>
+/*
+    Time  : 2019-10-15,Tuesday
+    Desc  : checking if graph is bipartite using BFS.
+*/
 
-#define ull                          unsigned long long int
-#define ll                           long long int
-#define endl                         '\n'
-#define all(v)                       begin(v), end(v)
-#define pb(x)                        push_back(x)
-#define mp                           make_pair
-#define ALLONS_Y                     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
-#define contains(container, value)   container.find(value) != container.end()
-#define rep(i,a,b)                   for(int i  = a; i < b; i++)
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int main() {
-	ALLONS_Y;
-	
-	int v,e,src,dest;
+enum color{
+	white,
+	black,
+	none
+};
 
-	while(cin >> v){
-		if(v == 0) break;
+int main(){
 
-		cin >> e; 
+	int v, e;
+	int a, b;
+	cin >> v >> e;
 
-		list<int> g[v];
-		for(int i = 0; i < e; i++){
-			cin >> src >> dest;
-            src--; dest--;
-			g[src].pb(dest);
-			g[dest].pb(src);
-		}
+	vector<vector<int>> g(v);
 
-		int color[v];
-		fill(color,color+v,1000);
-		color[0] = 0;
+	for (int i = 0; i < e; i++){
+		cin >> a >> b;
+		g[a].push_back(b);
+		g[b].push_back(a);
+	}
 
-		bool is_bipartite = true;
-		queue<int> Q;
-		Q.push(0);
+	vector<color> colors(v, none);
+	bool isBipartite = true;
 
-		while(!Q.empty() && is_bipartite){
-			int top = Q.front();
-			Q.pop();
+	queue<int> Q;
+	Q.push(0);
+	colors[0] = color::white;
 
-			for(auto it = g[top].begin(); it != g[top].end(); it++){
-				
-				if(color[*it] == 1000){
-					color[*it] = 1 - color[top];
-					Q.push(*it);
-				}else if(color[*it] == color[top]){
-					is_bipartite = false;
-					break;
-				}
+	while (!Q.empty()){
+		int top = Q.front();
+		Q.pop();
+
+		for (auto it : g[top]){
+
+			if (colors[it] == color::none){
+				colors[it] = (color)(1 - colors[top]);
+				Q.push(it);
+			}
+			else if (colors[it] == colors[top]){
+				isBipartite = false;
+				break;
 			}
 		}
 
-		if(is_bipartite){
-			cout << "BICOLORABLE." << endl;
-		}else cout << "NOT BICOLORABLE."  << endl;
+		if (!isBipartite) break;
 	}
-		
+
+	if (isBipartite)
+		cout << "Bipartite" << endl;
+	else
+		cout << "Not Bipartite" << endl;
+
 	return 0;
 }
-
