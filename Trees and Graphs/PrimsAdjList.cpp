@@ -19,6 +19,8 @@ int minKey(int key[],int n,bool visited[]){
 	return min_idx;
 }
 
+
+
 void Prims(vector<pair<int,int> > nodes[],int n,int e){
 	
 	bool visited[n];
@@ -46,9 +48,9 @@ void Prims(vector<pair<int,int> > nodes[],int n,int e){
 
 		//for each nodes adjacent to choosen node, minimize the nodes key if possible.
 		for(auto i : nodes[u]){
-			if(!visited[i.first] && key[u]+i.second < key[i.first]){
+			if(!visited[i.first] && i.second < key[i.first]){
 				//minimize key value,
-				key[i.first] = key[u] + i.second;				
+				key[i.first] = i.second;				
 				//mark 'u' as parent of this node
 				parent[i.first] = u;
 			}
