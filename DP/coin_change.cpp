@@ -29,10 +29,7 @@ int no_of_ways(int total,int size,int coins[]){
 //another space optimized bottom up solution for coin change...
 int no_of_ways2(int total,int size,int coins[]){
 
-	int table[total+1];
-	
-	fill(table,table+total+1,0);
-	table[0] = 1;	
+	int table[total+1] = {1};		
 
 	for(int i = 0; i < size; i++){
 		for(int j = coins[i]; j < total+1; j++){
