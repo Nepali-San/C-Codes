@@ -3,7 +3,6 @@
 using namespace std;
 string s1,s2;
 
-
 int lcs(){
 	int table[s1.size()+1][s2.size()+1];
 

@@ -19,9 +19,23 @@ int fibo2(int n){
 	return arr[n];
 }
 
+//space optimized bottom up approach : O(n)
+int fibo3(int n){
+	if(n <= 1) return n;
+
+	int a = 0,b = 1,c;		
+	for(int i = 2; i  <= n; i++){
+		c = a+b;
+		a = b;
+		b = c;
+	}
+	return c;
+}
+
 int main(){
 	int n;
 	cin >> n;
 	cout << fibo2(n) << endl;
+	cout << fibo3(n) << endl;
 	return 0; 
 }

@@ -1,7 +1,7 @@
 #include<iostream>
 #include <map>
 using namespace std;
-map<int, long long int>memo;
+map<int, long long int> memo;
 
 long long int chance(int i , int n){
 	n = n - i;	

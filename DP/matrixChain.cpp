@@ -9,7 +9,6 @@ using namespace std;
 int dims[100];
 int n;
 
-
 ull matrixChain(){
 	ull m[n][n];
 	int q,j;
@@ -44,4 +43,3 @@ int main() {
 			
 	return 0;
 }
-
